@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, Text, StyleSheet, useWindowDimensions } from 'react-native'; // Import useWindowDimensions
 import SearchInput from './search';
 import ProductCard from './cards';
+import Navbar from '../../layout/Navbar';
+import Bottombar from '../../layout/Bottombar';
+
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -32,38 +35,41 @@ export default function Home() {
     }, []);
 
     return (
-        <View style={{ flex: 1, width: "100%", alignItems: "center", marginTop: 10 }}>
-
-            <View>
-                <Text style={{
-                    textAlign: "left",
-                    fontSize: 48,
-                    fontWeight: "bold"
-                }}>Hi {userName || "Loading..."}</Text> {/* Display "Loading..." until userName is fetched */}
-                <Text style={{
-                    textAlign: "left",
-                    fontSize: 20,
-                    color: "#9E9E9E",
-                    fontWeight: "medium"
-                }}>Welcome to Katsu Store</Text>
+        <>
+            <Navbar />
+            <View style={{ flex: 1, width: "100%", alignItems: "center", marginTop: 10 }}>
+                <View>
+                    <Text style={{
+                        textAlign: "left",
+                        fontSize: 48,
+                        fontWeight: "bold"
+                    }}>Hi {userName || "Loading..."}</Text>
+                    <Text style={{
+                        textAlign: "left",
+                        fontSize: 20,
+                        color: "#9E9E9E",
+                        fontWeight: "medium"
+                    }}>Welcome to Katsu Store</Text>
+                </View>
+                <SearchInput />
+                <View style={{ marginTop: 35, width: '90%', flex: 1 }}>
+                    <FlatList
+                        contentContainerStyle={{ paddingBottom: 120, flex: 1, marginVertical: 20 }}
+                        data={products}
+                        renderItem={({ item }) => (
+                            <ProductCard
+                                key={item.id}
+                                image={item.image}
+                                price={item.price}
+                                title={item.title.substring(0, 20) + "..."}
+                            />
+                        )}
+                        numColumns={2}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </View>
             </View>
-            <SearchInput />
-            <View style={{ marginTop: 35, width: '90%', flex: 1 }}>
-                <FlatList
-                    contentContainerStyle={{ paddingBottom: 70, flex: 1, marginVertical: 20 }}
-                    data={products}
-                    renderItem={({ item }) => (
-                        <ProductCard
-                            key={item.id}
-                            image={item.image}
-                            price={item.price}
-                            title={item.title.substring(0, 20) + "..."}
-                        />
-                    )}
-                    numColumns={2}
-                    keyExtractor={item => item.id.toString()}
-                />
-            </View>
-        </View>
+            <Bottombar />
+        </>
     );
 }
