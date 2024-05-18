@@ -17,17 +17,18 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 0,
         flexDirection: "row",
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
+        paddingHorizontal: "10%",
         alignItems: "center",
         backgroundColor: "#fff",
         width: "100%",
         height: 70,
-        backgroundColor: "#fff", // Change this to desired sidebar background color
+        backgroundColor: "#fff",
         borderTopWidth: 1,
-        borderTopColor: "#ccc", // Change this to desired border color
+        borderTopColor: "#ccc",
     },
     icon: {
-        // You can add any additional styles to the icons here
+
     },
 });
 
