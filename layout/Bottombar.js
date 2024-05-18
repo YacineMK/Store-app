@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-
+import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 function Sidebar() {
     return (
         <View style={styles.container}>
             <FontAwesome5 name="home" size={24} color="black" style={styles.icon} />
-            <FontAwesome5 name="user" size={24} color="black" style={styles.icon} />
-            <FontAwesome5 name="settings" size={24} color="black" style={styles.icon} />
+            <FontAwesome name="user" size={24} color="black" style={styles.icon} />
+            <Entypo name="info-with-circle" size={24} color="black" style={styles.icon} />
         </View>
     );
 }

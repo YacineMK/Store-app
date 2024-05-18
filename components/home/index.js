@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import { View, FlatList, Text, StyleSheet, useWindowDimensions } from 'react-native'; // Import useWindowDimensions
 import SearchInput from './search';
 import ProductCard from './cards';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
     const name = "John"; // You can use a fake name from an API
+    const windowWidth = useWindowDimensions().width; // Use useWindowDimensions hook
+    const numColumns = Math.floor(windowWidth / 180);
 
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
@@ -16,7 +18,7 @@ export default function Home() {
 
     return (
         <View style={{ flex: 1, width: "100%", alignItems: "center", marginTop: 10 }}>
-            <View >
+            <View>
                 <Text style={{
                     textAlign: "left",
                     fontSize: 48,
@@ -30,8 +32,9 @@ export default function Home() {
                 }}>Welcome to Katsu Store</Text>
             </View>
             <SearchInput />
-            <View style={{ marginTop: 35, flex: 1 }}> {/* Set flex: 1 to make FlatList take remaining space */}
+            <View style={{ marginTop: 35, width: '90%', flex: 1 }}>
                 <FlatList
+                    contentContainerStyle={{ paddingBottom: 70 }}
                     data={products}
                     renderItem={({ item }) => (
                         <ProductCard
@@ -41,11 +44,10 @@ export default function Home() {
                             title={item.title.substring(0, 20) + "..."}
                         />
                     )}
+                    numColumns={2}
                     keyExtractor={item => item.id.toString()}
                 />
             </View>
         </View>
     );
 }
-
-
