@@ -21,7 +21,7 @@ export default function Navbar() {
 const Navbarstyles = StyleSheet.create({
     nav: {
         flexDirection: 'row',
-        backgroundColor: '#f3f3f3',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 15,

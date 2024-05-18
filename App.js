@@ -3,20 +3,16 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Navbar from './layout/Navbar';
 import Home from './components/home';
+import { PaperProvider } from 'react-native-paper';
+import { name as appName } from './app.json';
 
-export default function App() {
+export default function Main() {
   return (
-    <View style={styles.container}>
+    <PaperProvider>
       <Navbar />
       <Home />
-      <StatusBar style="auto" />
-    </View>
+    </PaperProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f3f3f3",
-  }
-});
+

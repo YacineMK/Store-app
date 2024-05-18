@@ -1,43 +1,30 @@
-import React from "react";
-import { View, TextInput, StyleSheet, Dimensions } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import * as React from 'react';
+import { Searchbar } from 'react-native-paper';
 
 const SearchInput = () => {
-    const windowWidth = Dimensions.get("window").width;
+    const [searchQuery, setSearchQuery] = React.useState('');
 
     return (
-        <View style={[styles.container, { width: windowWidth * 0.82 }]}>
-            <TextInput
-                style={[styles.input, { fontSize: windowWidth * 0.045 }]}
-                placeholder="Search here"
-                placeholderTextColor="#000"
-            />
-            <Ionicons name="search" size={windowWidth * 0.06} color="#888" style={styles.icon} />
-        </View>
+        <Searchbar
+            placeholder="Search"
+            placeholderTextColor="black"
+            style={{
+                width: "90%",
+                borderRadius: 12,
+                backgroundColor: "#fff",
+                color: "black",
+                marginTop: 30,
+                borderColor: "black",
+                borderWidth: 1,
+                borderStyle: "solid"
+            }}
+            inputStyle={{ color: "black" }}
+            iconColor="black"
+            rippleColor="black"
+            onChangeText={setSearchQuery}
+            value={searchQuery}
+        />
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#f2f2f2",
-        borderRadius: 12,
-        paddingVertical: 10,
-        paddingHorizontal: 8,
-        borderStyle: "solid",
-        borderWidth: "1px",
-        borderColor: "#000"
-    },
-    icon: {
-        marginRight: 3,
-        color: "#000"
-    },
-    input: {
-        flex: 1,
-        height: "auto",
-        color: "#000",
-    },
-});
 
 export default SearchInput;
