@@ -90,11 +90,10 @@ const styles = StyleSheet.create({
         fontWeight: "500",
     },
     listContent: {
-        paddingBottom: 100,
         marginVertical: 20,
+        height: 300
     },
     flatList: {
-        flexGrow: 1,
         width: "100%",
     },
 });

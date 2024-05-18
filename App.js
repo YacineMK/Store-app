@@ -11,7 +11,14 @@ export default function Main() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            gestureEnabled: true,
+            contentContainerStyle: { flexGrow: 1 },
+            scrollEnabled: true,
+          }}
+        >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
