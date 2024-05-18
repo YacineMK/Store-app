@@ -24,9 +24,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignItems: "center",
         padding: 20,
-        maxWidth: 300,
+        width: "50%",
         borderColor: "#E0E0E0",
-        borderWidth: 1
+        borderWidth: 1,
+        marginHorizontal: 3
     },
     image: {
         width: 140,
@@ -49,11 +50,12 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 12,
         color: "#888",
+        marginRight: 30
     },
     buyButton: {
         backgroundColor: "#3498db",
-        paddingVertical: 5,
-        paddingHorizontal: 10,
+        paddingVertical: 6,
+        paddingHorizontal: 12,
         borderRadius: 5,
     },
     buyButtonText: {

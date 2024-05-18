@@ -5,9 +5,24 @@ import ProductCard from './cards';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
-    const name = "John"; // You can use a fake name from an API
-    const windowWidth = useWindowDimensions().width; // Use useWindowDimensions hook
-    const numColumns = Math.floor(windowWidth / 180);
+    const [userName, setUserName] = useState(null); // Initialize userName with null
+
+    const getFakeUser = () => {
+        return fetch('https://fakestoreapi.com/users?limit=1')
+            .then(response => response.json())
+            .then(data => {
+                const username = data[0]?.username || "Amine"; // Extract username from data
+                setUserName(username); // Update userName state
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+                setUserName("Amine"); // Set a default username in case of error
+            });
+    }
+
+    useEffect(() => {
+        getFakeUser(); // Fetch fake user data on component mount
+    }, []);
 
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
@@ -18,12 +33,13 @@ export default function Home() {
 
     return (
         <View style={{ flex: 1, width: "100%", alignItems: "center", marginTop: 10 }}>
+
             <View>
                 <Text style={{
                     textAlign: "left",
                     fontSize: 48,
                     fontWeight: "bold"
-                }}>Hi {name}</Text>
+                }}>Hi {userName || "Loading..."}</Text> {/* Display "Loading..." until userName is fetched */}
                 <Text style={{
                     textAlign: "left",
                     fontSize: 20,
@@ -34,7 +50,7 @@ export default function Home() {
             <SearchInput />
             <View style={{ marginTop: 35, width: '90%', flex: 1 }}>
                 <FlatList
-                    contentContainerStyle={{ paddingBottom: 70 }}
+                    contentContainerStyle={{ paddingBottom: 70, flex: 1, marginVertical: 20 }}
                     data={products}
                     renderItem={({ item }) => (
                         <ProductCard
