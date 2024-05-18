@@ -3,7 +3,9 @@ import { View, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-function Sidebar() {
+
+function Bottombar() {
+
     return (
         <View style={styles.container}>
             <FontAwesome5 name="home" size={24} color="black" style={styles.icon} />
@@ -16,7 +18,7 @@ function Sidebar() {
 const styles = StyleSheet.create({
     container: {
         position: "absolute",
-        bottom: 0,
+        bottom:0,
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: "10%",
@@ -33,4 +35,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Sidebar;
+export default Bottombar;

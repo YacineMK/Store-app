@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleSheet, useWindowDimensions } from 'react-native'; // Import useWindowDimensions
+import { View, FlatList, Text, StyleSheet } from 'react-native';
 import SearchInput from './search';
 import ProductCard from './cards';
 import Navbar from '../../layout/Navbar';
 import Bottombar from '../../layout/Bottombar';
 
-
 export default function Home() {
     const [products, setProducts] = useState([]);
-    const [userName, setUserName] = useState(null); // Initialize userName with null
+    const [userName, setUserName] = useState(null);
 
     const getFakeUser = () => {
         return fetch('https://fakestoreapi.com/users?limit=1')
             .then(response => response.json())
             .then(data => {
-                const username = data[0]?.username || "Amine"; // Extract username from data
-                setUserName(username); // Update userName state
+                const username = data[0]?.username || "Amine";
+                setUserName(username);
             })
             .catch(error => {
                 console.error('Error fetching user data:', error);
-                setUserName("Amine"); // Set a default username in case of error
+                setUserName("Amine");
             });
     }
 
     useEffect(() => {
-        getFakeUser(); // Fetch fake user data on component mount
+        getFakeUser();
     }, []);
 
     useEffect(() => {
@@ -35,41 +34,67 @@ export default function Home() {
     }, []);
 
     return (
-        <>
+        <View style={styles.container}>
             <Navbar />
-            <View style={{ flex: 1, width: "100%", alignItems: "center", marginTop: 10 }}>
-                <View>
-                    <Text style={{
-                        textAlign: "left",
-                        fontSize: 48,
-                        fontWeight: "bold"
-                    }}>Hi {userName || "Loading..."}</Text>
-                    <Text style={{
-                        textAlign: "left",
-                        fontSize: 20,
-                        color: "#9E9E9E",
-                        fontWeight: "medium"
-                    }}>Welcome to Katsu Store</Text>
+            <View style={styles.content}>
+                <View style={styles.header}>
+                    <Text style={styles.greeting}>Hi {userName || "Loading..."}</Text>
+                    <Text style={styles.welcome}>Welcome to Katsu Store</Text>
                 </View>
                 <SearchInput />
-                <View style={{ marginTop: 35, width: '90%', flex: 1 }}>
-                    <FlatList
-                        contentContainerStyle={{ paddingBottom: 120, flex: 1, marginVertical: 20 }}
-                        data={products}
-                        renderItem={({ item }) => (
-                            <ProductCard
-                                key={item.id}
-                                image={item.image}
-                                price={item.price}
-                                title={item.title.substring(0, 20) + "..."}
-                            />
-                        )}
-                        numColumns={2}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                </View>
+                <FlatList
+                    style={styles.flatList} // Added style
+                    contentContainerStyle={styles.listContent}
+                    data={products}
+                    renderItem={({ item }) => (
+                        <ProductCard
+                            key={item.id}
+                            image={item.image}
+                            price={item.price}
+                            title={item.title.substring(0, 19) + "..."}
+                        />
+                    )}
+                    numColumns={2}
+                    keyExtractor={item => item.id.toString()}
+                />
             </View>
             <Bottombar />
-        </>
+        </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+    },
+    content: {
+        flex: 1,
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 70,
+    },
+    header: {
+        width: "100%",
+        paddingHorizontal: "5%",
+    },
+    greeting: {
+        textAlign: "left",
+        fontSize: 48,
+        fontWeight: "bold",
+    },
+    welcome: {
+        textAlign: "left",
+        fontSize: 20,
+        color: "#9E9E9E",
+        fontWeight: "500",
+    },
+    listContent: {
+        paddingBottom: 100,
+        marginVertical: 20,
+    },
+    flatList: {
+        flexGrow: 1,
+        width: "100%",
+    },
+});

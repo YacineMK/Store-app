@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TextInput, Button } from 'react-native-paper';
 import { View, StyleSheet, Text } from 'react-native';
 
-export default function Login() {
+export default function Login({ navigation }) {
     const [text, setText] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -32,7 +32,7 @@ export default function Login() {
                 right={<TextInput.Icon icon="eye" />}
                 style={styles.input}
             />
-            <Button mode="contained" style={{ width: "80%", color: "#fff", backgroundColor: "black" }}>
+            <Button mode="contained" onPress={() => navigation.navigate('Home')} style={{ width: "80%", color: "#fff", backgroundColor: "black" }}>
                 Submit
             </Button>
         </View>
